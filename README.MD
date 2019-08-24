@@ -17,17 +17,13 @@ npm install @iosio/pwc --save
 ```js
 import {h, Fragment} from 'preact';
 import {useState} from 'preact/hooks';
-import {obi} from '@iosio/obi/preact';
 import {pwc} from '@iosio/pwc';
 
-
-let state = obi({color: 'red'});
-
-const Tester = pwc('tester-component', ({foo, host}) => {
+const Tester = pwc('tester-component', ({foo, host, initialVal}) => {
 
   const [color, setColor] = useState('red')
   
-  const changeColor = () =>{
+  const changeColor = () => {
       setColor(color === 'red' ? 'blue' : 'red');
   }
   
@@ -42,23 +38,27 @@ const Tester = pwc('tester-component', ({foo, host}) => {
       </style>
     
     
-      <h1 style={{color}}>hello i am {color}</h1>
+      <h1 style={{color}}>hello i am a {initialVal}</h1>
       
       <button onClick={changeColor}>hello - {foo}</button>
       
+      <slot/>
     </Fragment>
   )
   
-}, {foo: Number});
+}, {foo: Number, initialVal: String});
 
+const App = ()=>{
+    <Fragment>
 
-//---------
-
-//only enumerable properties are iterated through 
-Object.keys(state).forEach((key)=>{
-    console.log(key)
-})
-//logs: color 
+        <Tester initial-val={'preact web component'}/>   
+        
+        <tester-component>
+            <h1>heeeyooo</h1>
+        </tester-component>
+        
+    </Fragment>
+}
 
 ```
 
