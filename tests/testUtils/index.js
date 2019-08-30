@@ -11,8 +11,7 @@ export function hashCustomElement(CustomElement) {
   customElements.define(name, CustomElement);
   return (attributes, children) => {
     let div = document.createElement("div");
-    div.innerHTML = `<${name} ${attributes || ""}>${children ||
-    ""}</${name}>`;
+    div.innerHTML = `<${name} ${attributes || ""}>${children || ""}</${name}>`;
     document.body.appendChild(div);
     return div.firstChild;
   };

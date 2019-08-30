@@ -1,6 +1,6 @@
-import {PWC, x} from "../core/PWC";
+import {PWC, x} from "../src";
 import {h, Fragment, Component, render} from "preact";
-import {hashCustomElement, randomName} from "./testUtils/atomicoUtil";
+import {hashCustomElement, randomName} from "./testUtils";
 
 const till = async (time) => new Promise(resolve => setTimeout(resolve, time || 300));
 
@@ -28,6 +28,7 @@ class CustomElement extends PWC {
 
 let innerRootExample = hashCustomElement(CustomElement);
 
+
 describe("PWC base class", () => {
 
 
@@ -36,7 +37,7 @@ describe("PWC base class", () => {
     const tag = randomName();
 
     const Rando = x(tag, (props) => {
-      return <h1>X!</h1>
+      return <h1>PWC!</h1>
     });
 
     let mountingPoint = document.createElement('div');
@@ -63,7 +64,7 @@ describe("PWC base class", () => {
 
     const Rando = x(tag, class extends Component {
       render() {
-        return <h1>X!</h1>
+        return <h1>PWC!</h1>
       }
     });
 
@@ -112,7 +113,7 @@ describe("PWC base class", () => {
     expect(elem.shadowRoot.innerHTML).toBe('<div>initial</div>');
 
 
-    elem.setAttribute('test-value', 'updated')
+    elem.setAttribute('test-value', 'updated');
 
     await elem._process;
 
@@ -120,7 +121,7 @@ describe("PWC base class", () => {
 
     expect(mountingPoint.innerHTML).toBe(`<x-${tag} test-value="updated" class="___"></x-${tag}>`);
 
-    console.log(elem.shadowRoot.innerHTML)
+    console.log(elem.shadowRoot.innerHTML);
 
     expect(elem.shadowRoot.innerHTML).toBe('<div>updated</div>');
 
